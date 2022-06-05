@@ -19,6 +19,7 @@ name = "blog_os"
 version = "0.1.0"
 dependencies = [
  "bootloader",
+ "volatile 0.2.7",
  "x86_64",
 ]
 
@@ -36,6 +37,12 @@ checksum = "f2cc38e8fa666e2de3c4aba7edeb5ffc5246c1c2ed0e3d17e560aeeba736b23f"
 
 [[package]]
 name = "volatile"
+version = "0.2.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f6b06ad3ed06fef1713569d547cdbdb439eafed76341820fb0e0344f29a41945"
+
+[[package]]
+name = "volatile"
 version = "0.4.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3ca98349dda8a60ae74e04fd90c7fb4d6a4fbe01e6d3be095478aa0b76f6c0c"
@@ -49,5 +56,5 @@ dependencies = [
  "bit_field",
  "bitflags",
  "rustversion",
- "volatile",
+ "volatile 0.4.5",
 ]

@@ -9,6 +9,7 @@ edition = "2018"
 # see https://github.com/phil-opp/blog_os/issues/1066
 bootloader = "0.9.20"
 x86_64 = "0.14.9"
+volatile = "0.2.6"
 
 [profile.dev]
 panic = "abort"
