@@ -5,16 +5,14 @@ mod vga_buffer;
 
 use core::panic::PanicInfo;
 
-static HELLO: &[u8] = b"Hello world";
-
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
     loop {}
 }
 
 #[no_mangle]
 pub extern "C" fn  _start() -> ! {
-    let vga_buffer = 0xb8000 as *mut u8;
 
     // for (i, &byte) in HELLO.iter().enumerate() {
     //     unsafe {
@@ -23,6 +21,7 @@ pub extern "C" fn  _start() -> ! {
     //     }
     // }
 
-    vga_buffer::print_some();
+    println!("Hello World{}", "!");
+    panic!("Some panic message");
     loop {}
 }
