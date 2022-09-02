@@ -1,19 +1,30 @@
 #![no_std]
 #![no_main]
+#![feature(custom_test_frameworks)]
+#![test_runner(blog_os::test_runner)]
+#![reexport_test_harness_main = "test_main"]
 
-mod vga_buffer;
 
 use core::panic::PanicInfo;
 
+use blog_os::println;
+
 #[panic_handler]
+#[cfg(not(test))]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
     loop {}
 }
 
-#[no_mangle]
-pub extern "C" fn  _start() -> ! {
 
+#[panic_handler]
+#[cfg(test)]
+fn panic(info: &PanicInfo) -> ! {
+    blog_os::test_panic_handler(info)
+}
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
     // for (i, &byte) in HELLO.iter().enumerate() {
     //     unsafe {
     //         *vga_buffer.offset(i as isize * 2) = byte;
@@ -22,6 +33,17 @@ pub extern "C" fn  _start() -> ! {
     // }
 
     println!("Hello World{}", "!");
-    panic!("Some panic message");
+
+    #[cfg(test)]
+    test_main();
+
     loop {}
+}
+
+
+#[test_case]
+fn trivial_assertion() {
+    // serial_println!("trivial assertion...");
+    assert_eq!(1, 1);
+    // serial_println!("[ok]");
 }
