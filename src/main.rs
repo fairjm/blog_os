@@ -36,7 +36,18 @@ pub extern "C" fn _start() -> ! {
 
     blog_os::init();
 
-    x86_64::instructions::interrupts::int3();
+    // x86_64::instructions::interrupts::int3();
+
+    // page fault
+    // unsafe {
+    //     *(0xccccccc as *mut u64) = 1111; 
+    // }
+
+    //kernel stack overflow
+    // fn stack_overflow() {
+    //     stack_overflow();
+    // }
+    // stack_overflow();
 
     #[cfg(test)]
     test_main();
